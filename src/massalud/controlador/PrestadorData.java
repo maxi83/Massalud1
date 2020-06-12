@@ -80,8 +80,8 @@ public class PrestadorData {
                 prestador.setDni(resultSet.getInt("dni"));
                 prestador.setActivo(resultSet.getBoolean("activo"));
                 
-//                Especialidad e = buscarEspecialidad(resultSet.getInt("idEspecialidad"));
-//                prestador.setEspecialidad(e);
+                Especialidad e = buscarEspecialidad(resultSet.getInt("idEspecialidad"));
+                prestador.setEspecialidad(e);
 
                 
             }      

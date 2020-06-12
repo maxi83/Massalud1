@@ -17,11 +17,12 @@ import massalud.modelo.Prestador;
 
 
 public class HorarioData {
-    private Conexion conexion;
+    private Conexion conexion = null;
     private Connection con;
 
     public HorarioData(Conexion conexion) {
         try {
+            this.conexion = conexion;
             con = conexion.getConexion();
             
             System.out.println("Conecetado a la base de datos");
