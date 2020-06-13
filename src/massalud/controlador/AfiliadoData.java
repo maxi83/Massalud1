@@ -205,42 +205,5 @@ public class AfiliadoData {
         return  listaAfiliados;
     }
     
-    //Comprar Orden
-    // NO FUNCA aun
-    public Orden comprarOrden(Afiliado afiliado, Prestador prestador, String formaPago){
-        Orden orden = new Orden();
-        try {
-            
-            String sql = "INSERT INTO orden (fecha, formaPago, importe, idAfiliado, idHorario, activo) VALUES (?, ?, ?, ?, ?, ? );";
-
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setDate(1, Date.valueOf(LocalDate.now()));
-            ps.setString(2, orden.getFormaPago());            
-            ps.setFloat(3, orden.getImporte());
-            ps.setInt(4, afiliado.getIdAfiliado());
-            ps.setInt(5, orden.getIdHorario().getIdHorario());
-            ps.setBoolean(6, orden.isActivo());
-            
-            ps.executeUpdate();
-            
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                orden.setIdOrden(rs.getInt(1));
-                System.out.println("Se ha guardado la orden: " + orden);
-                
-            } else {
-                System.out.println("No se pudo obtener el id luego de insertar la orden");
-            }
-            ps.close();
-    
-        } catch (SQLException ex) {
-            System.out.println("Error al guardar la orden: " + ex.getMessage());
-        }
         
-        return orden;
-    }
-    
-    
-    // ver: agregarAlumno() borrarAlumno() buscarAlumno() actualizarAlumno()
 }

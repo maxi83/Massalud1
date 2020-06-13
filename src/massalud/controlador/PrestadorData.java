@@ -2,6 +2,7 @@
 package massalud.controlador;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,7 +73,7 @@ public class PrestadorData {
             
             ResultSet resultSet=ps.executeQuery();
             
-            while(resultSet.next()){
+            if(resultSet.next()){
                 prestador = new Prestador();
                 prestador.setIdPrestador(resultSet.getInt("idPrestador"));
                 prestador.setNombre(resultSet.getString("nombre"));
@@ -101,8 +102,147 @@ public class PrestadorData {
         
         return ed.buscarEspecialidad(idEspecialidad);
         
+    }          
+    
+    
+    //ListarPrestadores
+    
+    public List<Prestador> obtenerPrestadores(){
+        List<Prestador> listaPrestadores = new ArrayList<Prestador>();
+            
+
+        try {
+            String sql = "SELECT * FROM prestador;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = ps.executeQuery();
+            
+            Prestador prestador;
+            while(resultSet.next()){
+                prestador = new Prestador();
+                prestador.setIdPrestador(resultSet.getInt("idPrestador"));
+                prestador.setNombre(resultSet.getString("nombre"));
+                prestador.setApellido(resultSet.getString("apellido"));
+                prestador.setDni(resultSet.getInt("dni"));
+                prestador.setActivo(resultSet.getBoolean("activo"));
+                
+                Especialidad e = buscarEspecialidad(resultSet.getInt("idEspecialidad"));
+                prestador.setEspecialidad(e);
+                
+
+                listaPrestadores.add(prestador);
+                //System.out.println("Lista de prestadores/a: "+prestador.getNombre());
+            }      
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los prestadores: " + ex.getMessage());
+        }
+        
+        
+        return  listaPrestadores;
     }
     
-               
+    //ListarPrestadoresActivos
     
+    public List<Prestador> obtenerPrestadoresActivos(){
+        List<Prestador> listaPrestadores = new ArrayList<Prestador>();
+            
+
+        try {
+            String sql = "SELECT * FROM prestador WHERE activo = true;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            ResultSet resultSet = ps.executeQuery();
+            
+            Prestador prestador;
+            while(resultSet.next()){
+                prestador = new Prestador();
+                prestador.setIdPrestador(resultSet.getInt("idPrestador"));
+                prestador.setNombre(resultSet.getString("nombre"));
+                prestador.setApellido(resultSet.getString("apellido"));
+                prestador.setDni(resultSet.getInt("dni"));
+                prestador.setActivo(resultSet.getBoolean("activo"));
+                
+                Especialidad e = buscarEspecialidad(resultSet.getInt("idEspecialidad"));
+                prestador.setEspecialidad(e);
+                
+
+                listaPrestadores.add(prestador);
+                //System.out.println("Lista de prestadores/a: "+prestador.getNombre());
+            }      
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los prestadores: " + ex.getMessage());
+        }
+        
+        
+        return  listaPrestadores;
+    }
+    
+    //ListarPrestadorSegunEspecialidad
+    
+    public List<Prestador> obtenerPrestadoresPorEspecialidad(int idEspecialidad){
+        List<Prestador> listaPrestadores = new ArrayList<Prestador>();
+            
+
+        try {
+            String sql = "SELECT * FROM prestador WHERE idEspecialidad = ?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1,idEspecialidad);
+            ResultSet resultSet = ps.executeQuery();
+            
+            Prestador prestador;
+            while(resultSet.next()){
+                prestador = new Prestador();
+                prestador.setIdPrestador(resultSet.getInt("idPrestador"));
+                prestador.setNombre(resultSet.getString("nombre"));
+                prestador.setApellido(resultSet.getString("apellido"));
+                prestador.setDni(resultSet.getInt("dni"));
+                prestador.setActivo(resultSet.getBoolean("activo"));
+                
+                Especialidad e = buscarEspecialidad(resultSet.getInt("idEspecialidad"));
+                prestador.setEspecialidad(e);
+                
+
+                listaPrestadores.add(prestador);
+                //System.out.println("Lista de prestadores/a: "+prestador.getNombre());
+            }      
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los prestadores: " + ex.getMessage());
+        }
+       
+        return  listaPrestadores;
+    }
+    
+    
+    //ActualizarPrestador(Prestador prestador)
+    
+    public void actualizarPrestador(Prestador prestador){
+    
+        try {
+            
+            String sql = "UPDATE prestador SET nombre = ?, apellido = ? , "
+                    + "dni =?, activo =?, idEspecialidad = ? WHERE idPrestador = ?;";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, prestador.getNombre());
+            ps.setString(2, prestador.getApellido());
+            ps.setInt(3, prestador.getDni());            
+            ps.setBoolean(4, prestador.isActivo());     
+            ps.setInt(5, prestador.getEspecialidad().getIdEspecialidad());
+            ps.setInt(6, prestador.getIdPrestador());
+            
+            
+            
+            ps.executeUpdate();
+            
+          
+            ps.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar el prestador: " + ex.getMessage());
+        }
+    
+    }
 }

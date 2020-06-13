@@ -26,10 +26,10 @@ public class OrdenData {
         }
     }
     
-    //Funciono!
+    
     public void generarOrden(Orden orden){
-        
-        try {
+        if(orden.getIdAfiliado().isActivo()){ 
+            try {
             
             String sql = "INSERT INTO orden (fecha, formaPago, importe, idAfiliado, idHorario, activo) VALUES ( ? , ? , ?, ? , ?, ? );";
 
@@ -41,16 +41,7 @@ public class OrdenData {
             ps.setInt(5, orden.getIdHorario().getIdHorario());
             ps.setBoolean(6, orden.isActivo());
             
-            //test
-            System.out.println(Date.valueOf(orden.getFecha()));
-            System.out.println(orden.getFormaPago());
-            System.out.println(orden.getImporte());
-            System.out.println(orden.getIdAfiliado().getIdAfiliado());
-            System.out.println(orden.getIdHorario().getIdHorario());
-            System.out.println(orden.isActivo());
-            
-            
-            
+        
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -62,10 +53,23 @@ public class OrdenData {
             }
             ps.close();
     
-        } catch (SQLException ex) {
-            System.out.println("Error al generar la orden: " + ex.getMessage());
+            } catch (SQLException ex) {
+                System.out.println("Error al generar la orden: " + ex.getMessage());
+            }
+        }else{
+            System.out.println("El Afiliado esta inactivo por lo tanto no puede sacar ordenes");
         }
         
+        
     }
+    
+    
+    // ListarOrdenesPorDniAfiliado(int dniAfiliado)
+    
+    // ListarOrdenesPorFecha(LocalDate localdate)
+    
+    //ActualizarOrden(Orden orden)
+    
+    //CambiarEstadoOrden(Orden orden)
     
 }

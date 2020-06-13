@@ -19,6 +19,13 @@ public class Prestador {
         this.activo = activo;
         this.especialidad = especialidad;
     }
+
+    @Override
+    public String toString() {
+        return idPrestador + " - " + nombre + " - " + apellido + " - " + dni + " - " + activo + " - " + especialidad.getEspecialidad(); 
+    }
+    
+    
     
 //    Getters y Setters
 

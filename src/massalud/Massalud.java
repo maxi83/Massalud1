@@ -1,7 +1,9 @@
 
 package massalud;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,18 +69,56 @@ public class Massalud {
 //            pd.agregarPrestador(p1);
             
             // TESTEANDO AFILIADODATA
-            Afiliado testAfiliado = ad.buscarAfiliado(28000111);
+            Afiliado testAfiliado = ad.buscarAfiliado(30157163);
+            
             HorarioData hd = new HorarioData(con);
             
             Horario horario1 = hd.buscarHorario(1);
-            Orden o1 = new Orden(LocalDate.now(), "tarjeta", 100f, testAfiliado, horario1, true);
+            Orden o1 = new Orden(LocalDate.now(), "efectivo", 199f, testAfiliado, horario1, true);
 //            Orden o2 = ad.comprarOrden(f1, p1, "efectivo");
 
             //TESTEANDO ORDENDATA
             OrdenData od = new OrdenData(con);
-            od.generarOrden(o1);
+//            od.generarOrden(o1);
             
+            //TESTEANDO ESPECIALIDADDATA
+            // ActualizarEspecialidad
+//            Especialidad dentista = ed.buscarEspecialidad(2);
+//            dentista.setEspecialidad("Dentista");
+//            ed.actualizarEspecialidad(dentista);
             
+            // TESTEANDO PRESTADORDATA
+            // ListarPrestadores
+//            List<Prestador> listaDePrestadores = pd.obtenerPrestadores();
+//            for(Prestador p : listaDePrestadores){
+//                System.out.println(p);
+//            }
+            
+            // ListarPrestadoresActivos
+//            List<Prestador> listaDePrestadoresActivos = pd.obtenerPrestadoresActivos();
+//            for(Prestador p : listaDePrestadoresActivos){
+//                System.out.println(p);
+//            }
+            
+            // ListarPrestadoresPorEspecialidad
+//            List<Prestador> listaDePrestadoresEspecialidad = pd.obtenerPrestadoresPorEspecialidad(1);
+//            for(Prestador p : listaDePrestadoresEspecialidad){
+//                System.out.println(p);
+//            }            
+            
+
+            //TESTEANDO PRESTADORDATA
+            //ActualizarPrestador
+//            Prestador pAActualizar = pd.buscarPrestador(3);
+//            Especialidad eAActualizar = ed.buscarEspecialidad(2);
+//            
+//            pAActualizar.setNombre("Jorge");
+//            pAActualizar.setEspecialidad(eAActualizar);
+//            
+//            pd.actualizarPrestador(pAActualizar);
+            
+           
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Massalud.class.getName()).log(Level.SEVERE, null, ex);
         }

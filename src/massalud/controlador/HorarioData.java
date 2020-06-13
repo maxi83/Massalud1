@@ -17,7 +17,7 @@ import massalud.modelo.Prestador;
 
 
 public class HorarioData {
-    private Conexion conexion = null;
+    private Conexion conexion;
     private Connection con;
 
     public HorarioData(Conexion conexion) {
@@ -75,8 +75,9 @@ public class HorarioData {
         
     }
     
+    //ActualizarHorario(Horario horario)
     
+    // Listar Horarios por prestador(idprestador)
     
-    
-  
+  // Consulta: Y atiende en cada uno de esos horarios un solo paciente (para simplificar el proceso).
 }
