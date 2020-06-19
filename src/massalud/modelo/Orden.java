@@ -26,8 +26,10 @@ public class Orden {
 
     @Override
     public String toString() {
-        return idOrden + " - " + fecha + " - " + " - " + importe + " - " + idAfiliado.getNombre() + " -"
-                + " " + idHorario.getIdPrestador();
+        return " IdOrden: " + idOrden + "\t Fecha: " + fecha + "\t Importe: " + importe + 
+                "\n Afiliado: " + idAfiliado.getNombre() + " " + idAfiliado.getApellido() +
+                "\n Horario: " + idHorario.getDia() + " " + idHorario.getHorarioAtencion() + "hs. \n" +
+                idHorario.getIdPrestador();
     }
 
     

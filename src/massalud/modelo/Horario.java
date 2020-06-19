@@ -4,7 +4,7 @@ package massalud.modelo;
 public class Horario {
     private int IdHorario = -1;
     private String dia;
-    private int horarioAtencion; //Consultar a profe por type
+    private int horarioAtencion; 
     private Prestador idPrestador;
 
     public Horario() {
@@ -14,6 +14,12 @@ public class Horario {
         this.dia = dia;
         this.horarioAtencion = horarioAtencion;
         this.idPrestador = idPrestador;
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre Prestador: " + idPrestador.getNombre() + ", dia: " + dia +
+                ", Horario de atencion: " + horarioAtencion + "hs.";
     }
 
     

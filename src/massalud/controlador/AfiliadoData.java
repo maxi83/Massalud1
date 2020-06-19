@@ -107,16 +107,16 @@ public class AfiliadoData {
     }
     
     // buscarAfliado()
-    public Afiliado buscarAfiliado(int dni){
+    public Afiliado buscarAfiliado(int idAfiliado){
     Afiliado afiliado=null;
     
    
     try {
             
-            String sql = "SELECT * FROM afiliado WHERE dni =?;";
+            String sql = "SELECT * FROM afiliado WHERE idAfiliado =?;";
 
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, dni);
+            ps.setInt(1, idAfiliado);
            
             
             ResultSet resultSet=ps.executeQuery();

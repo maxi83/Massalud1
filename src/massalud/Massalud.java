@@ -117,8 +117,40 @@ public class Massalud {
 //            
 //            pd.actualizarPrestador(pAActualizar);
             
-           
 
+            // TESTEANDO HORARIODATA
+            // Actualizando Horario
+//           Horario h1 = hd.buscarHorario(2);
+//           h1.setDia("jueves");
+//           hd.actualizarHorario(h1);
+           
+//            Lista de Horarios por Prestador
+//            List<Horario> listaHorarios = hd.obtenerHorarioPorPrestador(3);
+//            for(Horario h : listaHorarios){
+//                System.out.println(h);
+//            }
+
+            // Agregar Horario
+//            Prestador pRuben = pd.buscarPrestador(5);
+//            Horario h2 = new Horario("martes", 17, pRuben);            
+//            hd.agregarHorario(h2);
+            
+            // TESTEANDO ORDENDATA
+            //Buscar Orden
+            Orden o3 = od.buscarOrden(8);
+//            System.out.println(o3);
+            
+            //Actualizar Orden
+//            o3.setFormaPago("efectivo");
+//            System.out.println(o3);
+//            od.actualizarOrden(o3);
+//            System.out.println(o3);
+
+            //Actualizar Estado Orden
+            o3.setActivo(false);
+            od.actualizarEstadoOrden(o3);
+           
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Massalud.class.getName()).log(Level.SEVERE, null, ex);
         }
