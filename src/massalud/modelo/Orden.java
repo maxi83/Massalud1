@@ -29,7 +29,7 @@ public class Orden {
         return " IdOrden: " + idOrden + "\t Fecha: " + fecha + "\t Importe: " + importe + 
                 "\n Afiliado: " + idAfiliado.getNombre() + " " + idAfiliado.getApellido() +
                 "\n Horario: " + idHorario.getDia() + " " + idHorario.getHorarioAtencion() + "hs. \n" +
-                idHorario.getIdPrestador();
+                idHorario.getIdPrestador() + "\n";
     }
 
     

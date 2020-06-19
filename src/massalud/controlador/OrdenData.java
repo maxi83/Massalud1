@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import massalud.modelo.Afiliado;
 import massalud.modelo.Especialidad;
 import massalud.modelo.Horario;
@@ -125,9 +127,87 @@ public class OrdenData {
     }
     
     // ListarOrdenesPorDniAfiliado(int dniAfiliado)
+    public List<Orden> listarOrdenesPorAfiliado(int dniAfiliado){
+        List<Orden> listaOrdenes = new ArrayList<Orden>();
+            
+
+        try {
+            String sql = "SELECT idOrden, fecha, formaPago, importe, orden.idAfiliado, idHorario,"
+                    + " orden.activo FROM orden, afiliado WHERE orden.idAfiliado = afiliado.idAfiliado AND afiliado.dni = ?;";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, dniAfiliado);
+            
+            ResultSet resultSet = ps.executeQuery();
+            
+
+            while(resultSet.next()){
+                Orden orden = new Orden();
+                orden.setIdOrden(resultSet.getInt("idOrden"));
+                orden.setFecha(resultSet.getDate("fecha").toLocalDate());
+                orden.setFormaPago(resultSet.getString("formaPago"));
+                orden.setImporte(resultSet.getFloat("importe"));
+                
+                Afiliado a = buscarAfiliado(resultSet.getInt("idAfiliado"));
+                orden.setIdAfiliado(a);
+                
+                Horario h = buscarHorario(resultSet.getInt("idHorario"));
+                orden.setIdHorario(h);
+                
+                orden.setActivo(resultSet.getBoolean("activo"));
+
+                listaOrdenes.add(orden);
+                
+            }      
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener la lista de ordenes por dni afiliado: " + ex.getMessage());
+        }
+        
+        
+        return  listaOrdenes;
+    }
     
     // ListarOrdenesPorFecha(LocalDate localdate)
-    
+    public List<Orden> listarOrdenesPorFecha(LocalDate localdate){
+        List<Orden> listaOrdenes = new ArrayList<Orden>();
+        Date fecha = Date.valueOf(localdate); 
+
+        try {
+            String sql = "SELECT * FROM orden WHERE fecha = ?;";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, fecha);
+            
+            ResultSet resultSet = ps.executeQuery();
+            
+
+            while(resultSet.next()){
+                Orden orden = new Orden();
+                orden.setIdOrden(resultSet.getInt("idOrden"));
+                orden.setFecha(resultSet.getDate("fecha").toLocalDate());
+                orden.setFormaPago(resultSet.getString("formaPago"));
+                orden.setImporte(resultSet.getFloat("importe"));
+                
+                Afiliado a = buscarAfiliado(resultSet.getInt("idAfiliado"));
+                orden.setIdAfiliado(a);
+                
+                Horario h = buscarHorario(resultSet.getInt("idHorario"));
+                orden.setIdHorario(h);
+                
+                orden.setActivo(resultSet.getBoolean("activo"));
+
+                listaOrdenes.add(orden);
+                
+            }      
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener la lista de ordenes por dni afiliado: " + ex.getMessage());
+        }
+        
+        
+        return  listaOrdenes;
+    }
     
     //ActualizarOrden(Orden orden)
     public void actualizarOrden(Orden orden){

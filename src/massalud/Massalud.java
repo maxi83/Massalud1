@@ -147,9 +147,22 @@ public class Massalud {
 //            System.out.println(o3);
 
             //Actualizar Estado Orden
-            o3.setActivo(false);
-            od.actualizarEstadoOrden(o3);
+//            o3.setActivo(false);
+//            od.actualizarEstadoOrden(o3);
            
+
+            //Listar Ordenes por Dni Afiliado
+//            List<Orden> listaOrdenDni = od.listarOrdenesPorAfiliado(28000111);
+//            for(Orden o : listaOrdenDni){
+//                System.out.println(o);
+//            }
+
+            // Listar Ordenes por Fecha
+            List<Orden> listaOrdenFecha = od.listarOrdenesPorFecha(LocalDate.of(2020, 6, 19));
+            
+            for(Orden o : listaOrdenFecha){
+                System.out.println(o);
+            }
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Massalud.class.getName()).log(Level.SEVERE, null, ex);
