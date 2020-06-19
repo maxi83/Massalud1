@@ -141,6 +141,41 @@ public class AfiliadoData {
         return afiliado;
     }
     
+    // buscarAfliadoPorDni()
+    public Afiliado buscarAfiliadoPorDni(int dniAfiliado){
+    Afiliado afiliado=null;
+    
+   
+    try {
+            
+            String sql = "SELECT * FROM afiliado WHERE dni =?;";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, dniAfiliado);
+           
+            
+            ResultSet resultSet=ps.executeQuery();
+            
+            if(resultSet.next()){
+                afiliado = new Afiliado();
+                afiliado.setIdAfiliado(resultSet.getInt("idAfiliado"));
+                afiliado.setNombre(resultSet.getString("nombre"));
+                afiliado.setApellido(resultSet.getString("apellido"));
+                afiliado.setDni(resultSet.getInt("dni"));
+                afiliado.setActivo(resultSet.getBoolean("activo"));
+
+                
+            }      
+            ps.close();
+            
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar el afiliado por dni: " + ex.getMessage());
+        }
+        
+        return afiliado;
+    }
+    
     // listarAfiliados()
     public List<Afiliado> listarAfiliados(){
         List<Afiliado> listaAfiliados = new ArrayList<>();
