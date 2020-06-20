@@ -260,4 +260,43 @@ public class OrdenData {
         }
     
     }
+    
+    public List<Orden> listarOrdenes(){
+        List<Orden> listaOrdenes = new ArrayList<Orden>();
+            
+
+        try {
+            String sql = "SELECT * FROM orden";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet resultSet = ps.executeQuery();
+            
+
+            while(resultSet.next()){
+                Orden orden = new Orden();
+                orden.setIdOrden(resultSet.getInt("idOrden"));
+                orden.setFecha(resultSet.getDate("fecha").toLocalDate());
+                orden.setFormaPago(resultSet.getString("formaPago"));
+                orden.setImporte(resultSet.getFloat("importe"));
+                
+                Afiliado a = buscarAfiliado(resultSet.getInt("idAfiliado"));
+                orden.setIdAfiliado(a);
+                
+                Horario h = buscarHorario(resultSet.getInt("idHorario"));
+                orden.setIdHorario(h);
+                
+                orden.setActivo(resultSet.getBoolean("activo"));
+
+                listaOrdenes.add(orden);
+                
+            }      
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener la lista de ordenes: " + ex.getMessage());
+        }        
+        
+        return  listaOrdenes;
+    }
+    
 }

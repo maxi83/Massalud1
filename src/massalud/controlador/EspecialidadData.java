@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import massalud.modelo.Especialidad;
 
 
@@ -104,6 +106,31 @@ public class EspecialidadData {
     
     }
     
-    
+    public List<Especialidad> listarEspecialidades(){
+        List<Especialidad> listaEspecialidades = new ArrayList<Especialidad>();
+            
+
+        try {
+            String sql = "SELECT * FROM especialidad;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet resultSet = ps.executeQuery();
+            
+            while(resultSet.next()){
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(resultSet.getInt("idEspecialidad"));
+                especialidad.setEspecialidad(resultSet.getString("especialidad"));
+
+                listaEspecialidades.add(especialidad);
+            }      
+            
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener la lista de especialidades: " + ex.getMessage());
+        }
+        
+        
+        return listaEspecialidades;
+    }
     
 }

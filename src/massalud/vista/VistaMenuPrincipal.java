@@ -25,21 +25,208 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        escritorio = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        miSalir = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 694, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 396, Short.MAX_VALUE)
+        );
+
+        jMenu2.setText("Archivo");
+
+        miSalir.setText("Salir");
+        miSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSalirActionPerformed(evt);
+            }
+        });
+        jMenu2.add(miSalir);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Orden");
+        jMenuBar1.add(jMenu3);
+
+        jMenu5.setText("Afiliado");
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Prestador");
+        jMenuBar1.add(jMenu6);
+
+        jMenu8.setText("Especialidad");
+        jMenuBar1.add(jMenu8);
+
+        jMenu7.setText("Administración");
+
+        jMenuItem1.setText("Mostrar Afiliados");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem1);
+
+        jMenuItem3.setText("Mostrar Afiliados Activos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem3);
+
+        jMenuItem2.setText("Mostrar Prestadores");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem2);
+
+        jMenuItem4.setText("Mostrar Prestadores Activos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem4);
+
+        jMenuItem5.setText("Mostrar Prestadores por Especialidad");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem5);
+
+        jMenuItem6.setText("Mostrar Ordenes");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem6);
+
+        jMenuItem7.setText("Mostrar Ordenes por DNI del Afiliado");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu7);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarAfiliados vListarAfiliados = new VistaListarAfiliados();
+        vListarAfiliados.setVisible(true);
+        escritorio.add(vListarAfiliados);
+        escritorio.moveToFront(vListarAfiliados);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_miSalirActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarPrestadores vListarPrestadores = new VistaListarPrestadores();
+        vListarPrestadores.setVisible(true);
+        escritorio.add(vListarPrestadores);
+        escritorio.moveToFront(vListarPrestadores);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarAfiliadosActivos vListarAfiliadosActivos = new VistaListarAfiliadosActivos();
+        vListarAfiliadosActivos.setVisible(true);
+        escritorio.add(vListarAfiliadosActivos);
+        escritorio.moveToFront(vListarAfiliadosActivos);
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarPrestadoresActivos vListarPrestadoresActivos = new VistaListarPrestadoresActivos();
+        vListarPrestadoresActivos.setVisible(true);
+        escritorio.add(vListarPrestadoresActivos);
+        escritorio.moveToFront(vListarPrestadoresActivos);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarPrestadoresPorEspecialidad vListarPrestadoresXEspecialidad = new VistaListarPrestadoresPorEspecialidad();
+        vListarPrestadoresXEspecialidad.setVisible(true);
+        escritorio.add(vListarPrestadoresXEspecialidad);
+        escritorio.moveToFront(vListarPrestadoresXEspecialidad);
+        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarOrdenes vListarOrdenes = new VistaListarOrdenes();
+        vListarOrdenes.setVisible(true);
+        escritorio.add(vListarOrdenes);
+        escritorio.moveToFront(vListarOrdenes);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarOrdenesPorDni vListarOrdenesPorDni = new VistaListarOrdenesPorDni();
+        vListarOrdenesPorDni.setVisible(true);
+        escritorio.add(vListarOrdenesPorDni);
+        escritorio.moveToFront(vListarOrdenesPorDni);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +264,22 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem miSalir;
     // End of variables declaration//GEN-END:variables
 }
