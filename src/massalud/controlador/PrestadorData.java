@@ -16,7 +16,8 @@ import massalud.modelo.Prestador;
 
 public class PrestadorData {
     private Connection connection = null;
-     private Conexion conexion;
+    private Conexion conexion;
+    
 
     public PrestadorData(Conexion conexion) {
         try {
@@ -85,7 +86,8 @@ public class PrestadorData {
                 prestador.setEspecialidad(e);
 
                 
-            }      
+            }
+         
             ps.close();
             
             

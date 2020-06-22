@@ -34,6 +34,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -42,6 +43,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -80,6 +82,15 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu6);
 
         jMenu8.setText("Especialidad");
+
+        jMenuItem9.setText("Administrar Especialidad");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem9);
+
         jMenuBar1.add(jMenu8);
 
         jMenu7.setText("Administración");
@@ -139,6 +150,14 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu7.add(jMenuItem7);
+
+        jMenuItem8.setText("Mostrar Ordenes por Fecha");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem8);
 
         jMenuBar1.add(jMenu7);
 
@@ -228,6 +247,26 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(vListarOrdenesPorDni);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarOrdenesPorFecha vListarOrdenesporFecha = new VistaListarOrdenesPorFecha();
+        vListarOrdenesporFecha.setVisible(true);
+        escritorio.add(vListarOrdenesporFecha);
+        escritorio.moveToFront(vListarOrdenesporFecha);
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaAdministrarEspecialidad vAdministrarEspecialidad = new VistaAdministrarEspecialidad();
+        vAdministrarEspecialidad.setVisible(true);
+        escritorio.add(vAdministrarEspecialidad);
+        escritorio.moveToFront(vAdministrarEspecialidad);
+        
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -280,6 +319,8 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem miSalir;
     // End of variables declaration//GEN-END:variables
 }
