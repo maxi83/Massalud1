@@ -18,6 +18,16 @@ public class Especialidad {
     }
 
     
+
+    @Override
+    public int hashCode() {
+        return this.getIdEspecialidad(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
+    
+    
     // Getters y setters    
     
     public int getIdEspecialidad() {

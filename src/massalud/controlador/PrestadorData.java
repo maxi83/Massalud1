@@ -247,4 +247,28 @@ public class PrestadorData {
         }
     
     }
+    
+    public void actualizarEstadoPrestador(Prestador prestador){
+    
+        try {
+            
+            String sql = "UPDATE prestador SET activo =? WHERE idPrestador = ?;";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+                       
+            ps.setBoolean(1, prestador.isActivo());                 
+            ps.setInt(2, prestador.getIdPrestador());
+            
+            
+            
+            ps.executeUpdate();
+            
+          
+            ps.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar el estado del prestador: " + ex.getMessage());
+        }
+    
+    }
 }

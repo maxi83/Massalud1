@@ -5,7 +5,15 @@
  */
 package massalud.vista;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import massalud.controlador.Conexion;
+import massalud.controlador.EspecialidadData;
+import massalud.controlador.PrestadorData;
 import massalud.modelo.Especialidad;
+import massalud.modelo.Prestador;
 
 /**
  *
@@ -13,11 +21,29 @@ import massalud.modelo.Especialidad;
  */
 public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
 
+    private PrestadorData pd;
+    private EspecialidadData ed;
+    private Conexion conexion;
+    private List<Especialidad> listaEspecialidades;
+    
     /**
      * Creates new form VistaAdministrarPrestador
      */
     public VistaAdministrarPrestador() {
         initComponents();
+        
+        try {
+            conexion = new Conexion();
+            pd = new PrestadorData(conexion);
+            ed = new EspecialidadData(conexion);
+            
+            listaEspecialidades = ed.listarEspecialidades();
+            
+            cargarEspecialidades();
+        } catch (ClassNotFoundException ex) {
+            System.out.println("No se pudo crear el PrestadorData");
+            Logger.getLogger(VistaAdministrarPrestador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,20 +56,21 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         btBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        tIdEspecialidad = new javax.swing.JTextField();
+        tIdPrestador = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        tNombreEspecialidad = new javax.swing.JTextField();
+        tNombrePrestador = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        tNombreEspecialidad1 = new javax.swing.JTextField();
+        tApellidoPrestador = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        tNombreEspecialidad2 = new javax.swing.JTextField();
+        tDniPrestador = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbEspecialidad = new javax.swing.JComboBox<>();
         cbActivo = new javax.swing.JCheckBox();
         btGuardar = new javax.swing.JButton();
         btActualizar = new javax.swing.JButton();
-        btBorrar = new javax.swing.JButton();
+        btDesactivar = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
+        btSalir1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Administrar Prestador");
@@ -58,56 +85,56 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Id Prestador:");
 
-        tIdEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+        tIdPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tIdEspecialidadActionPerformed(evt);
+                tIdPrestadorActionPerformed(evt);
             }
         });
-        tIdEspecialidad.addKeyListener(new java.awt.event.KeyAdapter() {
+        tIdPrestador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tIdEspecialidadKeyTyped(evt);
+                tIdPrestadorKeyTyped(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Nombre:");
 
-        tNombreEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+        tNombrePrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tNombreEspecialidadActionPerformed(evt);
+                tNombrePrestadorActionPerformed(evt);
             }
         });
-        tNombreEspecialidad.addKeyListener(new java.awt.event.KeyAdapter() {
+        tNombrePrestador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tNombreEspecialidadKeyTyped(evt);
+                tNombrePrestadorKeyTyped(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Apellido:");
 
-        tNombreEspecialidad1.addActionListener(new java.awt.event.ActionListener() {
+        tApellidoPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tNombreEspecialidad1ActionPerformed(evt);
+                tApellidoPrestadorActionPerformed(evt);
             }
         });
-        tNombreEspecialidad1.addKeyListener(new java.awt.event.KeyAdapter() {
+        tApellidoPrestador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tNombreEspecialidad1KeyTyped(evt);
+                tApellidoPrestadorKeyTyped(evt);
             }
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("DNI:");
 
-        tNombreEspecialidad2.addActionListener(new java.awt.event.ActionListener() {
+        tDniPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tNombreEspecialidad2ActionPerformed(evt);
+                tDniPrestadorActionPerformed(evt);
             }
         });
-        tNombreEspecialidad2.addKeyListener(new java.awt.event.KeyAdapter() {
+        tDniPrestador.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tNombreEspecialidad2KeyTyped(evt);
+                tDniPrestadorKeyTyped(evt);
             }
         });
 
@@ -117,7 +144,7 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         cbActivo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbActivo.setText("Activo");
 
-        btGuardar.setText("Guardar");
+        btGuardar.setText("Crear");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btGuardarActionPerformed(evt);
@@ -131,10 +158,10 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
             }
         });
 
-        btBorrar.setText("Desactivar");
-        btBorrar.addActionListener(new java.awt.event.ActionListener() {
+        btDesactivar.setText("Desactivar/activar");
+        btDesactivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBorrarActionPerformed(evt);
+                btDesactivarActionPerformed(evt);
             }
         });
 
@@ -145,35 +172,20 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
             }
         });
 
+        btSalir1.setText("Salir");
+        btSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalir1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(174, 174, 174))
             .addGroup(layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tNombreEspecialidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(202, 202, 202))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btBuscar)
-                        .addGap(113, 113, 113))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -181,25 +193,53 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tNombreEspecialidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tDniPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbActivo)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(btActualizar)
-                                        .addGap(114, 114, 114)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(cbActivo)
+                                                .addGap(114, 114, 114))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(46, 46, 46)
+                                                .addComponent(cbEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                                 .addGap(58, 58, 58))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btGuardar)
+                                .addGap(28, 28, 28)
+                                .addComponent(btActualizar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btBorrar)
-                                .addGap(45, 45, 45)))
+                                .addComponent(btDesactivar)
+                                .addGap(30, 30, 30)))
                         .addComponent(btLimpiar)
-                        .addGap(69, 69, 69))))
+                        .addGap(69, 69, 69))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btBuscar)
+                        .addGap(113, 113, 113))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(174, 174, 174))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btSalir1)
+                        .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,177 +249,226 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tNombreEspecialidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tNombreEspecialidad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tDniPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cbActivo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btGuardar)
                     .addComponent(btActualizar)
-                    .addComponent(btBorrar)
+                    .addComponent(btDesactivar)
                     .addComponent(btLimpiar))
-                .addGap(68, 68, 68))
+                .addGap(30, 30, 30)
+                .addComponent(btSalir1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        int idEspecialidad;
+        int idPrestador;
         String nombre;
-
-        int maximo = listaEspecialidades.size();
-
-        Especialidad e;
-
-        if((tIdEspecialidad.getText() != null && !tIdEspecialidad.getText().isEmpty())){
-            idEspecialidad = Integer.parseInt(tIdEspecialidad.getText());
-            if(idEspecialidad <= maximo){
-                e = ed.buscarEspecialidad(idEspecialidad);
-
-                nombre = e.getEspecialidad();
-
-                tNombreEspecialidad.setText(nombre);
-            }else{
-                JOptionPane.showMessageDialog(this, "No se encuentra en la base de datos");
-            }
-
-        }else{
-            JOptionPane.showMessageDialog(this, "Por favor ingrese un id de especialidad");
-        }
-
+        String apellido;
+        int dni;        
+        boolean activo;
+        Especialidad especialidad;
+        
+        Prestador p;
+        idPrestador = Integer.parseInt(tIdPrestador.getText());
+        p = pd.buscarPrestador(idPrestador);
+        
+        nombre = p.getNombre();
+        apellido = p.getApellido();
+        dni = p.getDni();
+        activo = p.isActivo();
+        especialidad = p.getEspecialidad();
+        
+        tNombrePrestador.setText(nombre);
+        tApellidoPrestador.setText(apellido);
+        tDniPrestador.setText(dni + "");        
+        cbActivo.setSelected(activo);
+        
+        cbEspecialidad.setSelectedIndex(especialidad.getIdEspecialidad() - 1);
+   
     }//GEN-LAST:event_btBuscarActionPerformed
 
-    private void tIdEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tIdEspecialidadActionPerformed
+    private void tIdPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tIdPrestadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tIdEspecialidadActionPerformed
+    }//GEN-LAST:event_tIdPrestadorActionPerformed
 
-    private void tIdEspecialidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tIdEspecialidadKeyTyped
+    private void tIdPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tIdPrestadorKeyTyped
         char myChar = evt.getKeyChar();
 
         if(!Character.isDigit(myChar)){
             evt.consume();
         }
-    }//GEN-LAST:event_tIdEspecialidadKeyTyped
+    }//GEN-LAST:event_tIdPrestadorKeyTyped
 
-    private void tNombreEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNombreEspecialidadActionPerformed
+    private void tNombrePrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNombrePrestadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tNombreEspecialidadActionPerformed
+    }//GEN-LAST:event_tNombrePrestadorActionPerformed
 
-    private void tNombreEspecialidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombreEspecialidadKeyTyped
+    private void tNombrePrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombrePrestadorKeyTyped
         char myChar = evt.getKeyChar();
 
         if(Character.isDigit(myChar)){
             evt.consume();
         }
-    }//GEN-LAST:event_tNombreEspecialidadKeyTyped
+    }//GEN-LAST:event_tNombrePrestadorKeyTyped
 
-    private void tNombreEspecialidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNombreEspecialidad1ActionPerformed
+    private void tApellidoPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tApellidoPrestadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tNombreEspecialidad1ActionPerformed
+    }//GEN-LAST:event_tApellidoPrestadorActionPerformed
 
-    private void tNombreEspecialidad1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombreEspecialidad1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tNombreEspecialidad1KeyTyped
+    private void tApellidoPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tApellidoPrestadorKeyTyped
+        char myChar = evt.getKeyChar();
 
-    private void tNombreEspecialidad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNombreEspecialidad2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tNombreEspecialidad2ActionPerformed
+        if(Character.isDigit(myChar)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tApellidoPrestadorKeyTyped
 
-    private void tNombreEspecialidad2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombreEspecialidad2KeyTyped
+    private void tDniPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tDniPrestadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tNombreEspecialidad2KeyTyped
+    }//GEN-LAST:event_tDniPrestadorActionPerformed
+
+    private void tDniPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tDniPrestadorKeyTyped
+        char myChar = evt.getKeyChar();
+
+        if(!Character.isDigit(myChar)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tDniPrestadorKeyTyped
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
 
+        int idPrestador;
         String nombre;
-        LocalDate fecNac;
+        String apellido;
+        int dni;        
         boolean activo;
+        Especialidad especialidad;
+        
 
-        Alumno a;
+        Prestador p;
 
-        nombre = tNombreAlumno.getText();
-        fecNac = LocalDate.parse(tFecNacAlumno.getText());
-        activo = cbActivo.isSelected();
+        nombre = tNombrePrestador.getText();
+        apellido = tApellidoPrestador.getText();
+        dni = Integer.parseInt(tDniPrestador.getText());
+        especialidad = (Especialidad)cbEspecialidad.getSelectedItem();
+        activo = cbActivo.isSelected();        
+        
+        p = new Prestador(nombre, apellido, dni, activo, especialidad);
+        pd.agregarPrestador(p);
 
-        a = new Alumno(nombre, fecNac, activo);
-        ad.guardarAlumno(a);
-        tIdAlumno.setText(a.getId() + "");
+        tIdPrestador.setText(p.getIdPrestador() + "");
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
-        int idAlumno;
+        int idPrestador;
         String nombre;
-        LocalDate fecNac;
+        String apellido;
+        int dni;        
         boolean activo;
+        Especialidad especialidad;
 
-        Alumno a;
+        Prestador p;
 
-        if(tIdAlumno.getText() != null){
-            idAlumno = Integer.parseInt(tIdAlumno.getText());
-            nombre = tNombreAlumno.getText();
-            fecNac = LocalDate.parse(tFecNacAlumno.getText());
+        if(tIdPrestador.getText() != null && tNombrePrestador.getText() != null && tApellidoPrestador.getText() != null && tDniPrestador.getText() != null && (tDniPrestador.getText().length() >= 7 && tDniPrestador.getText().length() <= 8)){
+            idPrestador = Integer.parseInt(tIdPrestador.getText());
+            nombre = tNombrePrestador.getText();
+            apellido = tApellidoPrestador.getText();
+            dni = Integer.parseInt(tDniPrestador.getText());
             activo = cbActivo.isSelected();
+            especialidad = (Especialidad)cbEspecialidad.getSelectedItem();
+            
 
-            a = new Alumno(nombre, fecNac, activo);
-            a.setId(idAlumno);
+            p = new Prestador(nombre, apellido, dni, activo, especialidad);
+            p.setIdPrestador(idPrestador);
 
-            ad.actualizarAlumno(a);
+            pd.actualizarPrestador(p);
         }
 
     }//GEN-LAST:event_btActualizarActionPerformed
 
-    private void btBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBorrarActionPerformed
-        int idAlumno;
-        if(tIdAlumno.getText() != null){
-            idAlumno = Integer.parseInt(tIdAlumno.getText());
-            ad.borrarAlumno(idAlumno);
+    private void btDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDesactivarActionPerformed
+        int idPrestador;
+        Prestador p;
+        
+        if(tIdPrestador.getText() != null){
+            idPrestador = Integer.parseInt(tIdPrestador.getText());
+            p = pd.buscarPrestador(idPrestador);
+            
+            if(p.isActivo()){
+                cbActivo.setSelected(false);
+                p.setActivo(false);
+            }else{
+                cbActivo.setSelected(true);
+                 p.setActivo(true);
+            }            
+            
+            pd.actualizarEstadoPrestador(p);           
+            
         }
 
-    }//GEN-LAST:event_btBorrarActionPerformed
+    }//GEN-LAST:event_btDesactivarActionPerformed
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
-        tIdAlumno.setText("");
-        tNombreAlumno.setText("");
-        tFecNacAlumno.setText("");
+        tIdPrestador.setText("");
+        tNombrePrestador.setText("");
+        tApellidoPrestador.setText("");
+        tDniPrestador.setText("");
         cbActivo.setSelected(false);
     }//GEN-LAST:event_btLimpiarActionPerformed
 
+    private void btSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalir1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_btSalir1ActionPerformed
+
+    
+    public void cargarEspecialidades(){
+        for(Especialidad e : listaEspecialidades){
+            cbEspecialidad.addItem(e);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btActualizar;
-    private javax.swing.JButton btBorrar;
     private javax.swing.JButton btBuscar;
+    private javax.swing.JButton btDesactivar;
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btLimpiar;
+    private javax.swing.JButton btSalir;
+    private javax.swing.JButton btSalir1;
     private javax.swing.JCheckBox cbActivo;
-    private javax.swing.JComboBox<Especialidad> jComboBox1;
+    private javax.swing.JComboBox<Especialidad> cbEspecialidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField tIdEspecialidad;
-    private javax.swing.JTextField tNombreEspecialidad;
-    private javax.swing.JTextField tNombreEspecialidad1;
-    private javax.swing.JTextField tNombreEspecialidad2;
+    private javax.swing.JTextField tApellidoPrestador;
+    private javax.swing.JTextField tDniPrestador;
+    private javax.swing.JTextField tIdPrestador;
+    private javax.swing.JTextField tNombrePrestador;
     // End of variables declaration//GEN-END:variables
 }

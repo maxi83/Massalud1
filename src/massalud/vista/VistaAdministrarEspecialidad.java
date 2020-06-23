@@ -59,6 +59,7 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
         btCrear = new javax.swing.JButton();
         btActualizar = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
+        btSalir1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Administrar Especialidad");
@@ -119,6 +120,13 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
             }
         });
 
+        btSalir1.setText("Salir");
+        btSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalir1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,16 +147,20 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btActualizar)
-                                    .addGap(84, 84, 84)
-                                    .addComponent(btLimpiar))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(tIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(26, 26, 26)
-                                    .addComponent(btBuscar))))))
-                .addContainerGap(99, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(btBuscar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(btActualizar)
+                                .addGap(81, 81, 81)
+                                .addComponent(btLimpiar)))))
+                .addContainerGap(95, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btSalir1)
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,12 +176,14 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCrear)
                     .addComponent(btActualizar)
                     .addComponent(btLimpiar))
-                .addGap(70, 70, 70))
+                .addGap(32, 32, 32)
+                .addComponent(btSalir1)
+                .addContainerGap())
         );
 
         pack();
@@ -266,12 +280,17 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tNombreEspecialidadKeyTyped
 
+    private void btSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalir1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_btSalir1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btActualizar;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCrear;
     private javax.swing.JButton btLimpiar;
+    private javax.swing.JButton btSalir1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

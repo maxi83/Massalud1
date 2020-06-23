@@ -32,7 +32,9 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         miSalir = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -76,9 +78,27 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu5.setText("Afiliado");
+
+        jMenuItem11.setText("Administrar Afiliado");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem11);
+
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Prestador");
+
+        jMenuItem10.setText("Administrar Prestador");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem10);
+
         jMenuBar1.add(jMenu6);
 
         jMenu8.setText("Especialidad");
@@ -267,6 +287,24 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaAdministrarPrestador vAdministrarPrestador = new VistaAdministrarPrestador();
+        vAdministrarPrestador.setVisible(true);
+        escritorio.add(vAdministrarPrestador);
+        escritorio.moveToFront(vAdministrarPrestador);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaAdministrarAfiliado vAdministrarAfiliado = new VistaAdministrarAfiliado();
+        vAdministrarAfiliado.setVisible(true);
+        escritorio.add(vAdministrarAfiliado);
+        escritorio.moveToFront(vAdministrarAfiliado);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -313,6 +351,8 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
