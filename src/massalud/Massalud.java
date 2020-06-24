@@ -58,6 +58,10 @@ public class Massalud {
             // Agregando especialidad
             Especialidad e1 = new Especialidad("Cardiología");
 //            ed.agregarEspecialidad(e1);
+            //AGREGAR CIRUGIA
+            CirugiaData cd = new CirugiaData(con);
+            Cirugia c1 = new Cirugia ("pie",3,1,true);
+            cd.agregarCirugia(c1);
             
             // buscarEspecialidad
 //            Especialidad e2 = ed.buscarEspecialidad(1);
@@ -180,6 +184,7 @@ public class Massalud {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Massalud.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
 }
