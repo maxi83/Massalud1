@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2020 a las 16:20:57
+-- Tiempo de generación: 24-06-2020 a las 03:06:33
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -42,7 +42,8 @@ CREATE TABLE `afiliado` (
 INSERT INTO `afiliado` (`idAfiliado`, `nombre`, `apellido`, `dni`, `activo`) VALUES
 (1, 'Maxi', 'Capo', 30157163, 0),
 (2, 'Marco', 'Perez', 30157165, 1),
-(3, 'Florencia', 'Lopez', 28000111, 1);
+(3, 'Florencia', 'Lopez', 28000111, 1),
+(4, 'Teti', 'Hernandez', 94563139, 1);
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,9 @@ CREATE TABLE `especialidad` (
 
 INSERT INTO `especialidad` (`idEspecialidad`, `especialidad`) VALUES
 (1, 'Cardiología'),
-(2, 'Dentista');
+(2, 'Dentista'),
+(3, 'Pediatra'),
+(4, 'Oculista');
 
 -- --------------------------------------------------------
 
@@ -81,7 +84,11 @@ CREATE TABLE `horario` (
 --
 
 INSERT INTO `horario` (`idHorario`, `dia`, `horarioAtencion`, `idPrestador`) VALUES
-(1, 'lunes', 11, 3);
+(1, 'lunes', 11, 3),
+(2, 'jueves', 12, 5),
+(3, 'lunes', 14, 3),
+(4, 'miercoles', 13, 3),
+(5, 'martes', 17, 5);
 
 -- --------------------------------------------------------
 
@@ -104,8 +111,14 @@ CREATE TABLE `orden` (
 --
 
 INSERT INTO `orden` (`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idHorario`, `activo`) VALUES
-(8, '2020-06-11', 'efectivo', 300, 3, 1, 1),
-(9, '2020-06-12', 'tarjeta', 100, 3, 1, 1);
+(8, '2020-06-11', 'efectivo', 300, 3, 1, 0),
+(9, '2020-06-12', 'efectivo', 100, 3, 1, 1),
+(21, '2020-06-19', 'tarjeta', 800, 1, 2, 1),
+(22, '2020-06-19', 'efectivo', 500, 2, 2, 1),
+(23, '2020-06-20', 'efectivo', 100, 2, 4, 1),
+(24, '2020-06-23', 'efectivo', 100, 4, 2, 0),
+(25, '2020-06-23', 'efectivo', 100, 4, 1, 1),
+(26, '2020-06-24', 'efectivo', 100, 4, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -127,9 +140,10 @@ CREATE TABLE `prestador` (
 --
 
 INSERT INTO `prestador` (`idPrestador`, `nombre`, `apellido`, `dni`, `activo`, `idEspecialidad`) VALUES
-(3, 'Jorge', 'Perez', 12312343, 1, 2),
-(4, 'Pedro', 'Lucero', 98342234, 0, 1),
-(5, 'Ruben', 'Carabajal', 32123345, 1, 2);
+(3, 'Jorge', 'Perez', 12312343, 1, 3),
+(4, 'Pedro', 'Lucero', 98342234, 1, 1),
+(5, 'Ruben', 'Carabajal', 32123345, 1, 2),
+(6, 'Angela', 'Torres', 80201335, 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -177,31 +191,31 @@ ALTER TABLE `prestador`
 -- AUTO_INCREMENT de la tabla `afiliado`
 --
 ALTER TABLE `afiliado`
-  MODIFY `idAfiliado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idAfiliado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
-  MODIFY `idEspecialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idEspecialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `idOrden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idOrden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `prestador`
 --
 ALTER TABLE `prestador`
-  MODIFY `idPrestador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPrestador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
