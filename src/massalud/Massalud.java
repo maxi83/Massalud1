@@ -166,8 +166,16 @@ public class Massalud {
 
             //TESTEANDO AFILIADODATA
             //Buscar Afiliado Por Dni
-            Afiliado aPorDni = ad.buscarAfiliadoPorDni(28000111);
-            System.out.println(aPorDni);
+//            Afiliado aPorDni = ad.buscarAfiliadoPorDni(28000111);
+//            System.out.println(aPorDni);
+
+            //TESTEANDO HORARIODATA
+            Prestador traidoBD = pd.buscarPrestador(3);
+//            List<Horario> horariosP = hd.obtenerHorarioPorPrestador(traidoBD);
+            
+//            for(Horario h : horariosP){
+//                System.out.println(h);
+//            }
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Massalud.class.getName()).log(Level.SEVERE, null, ex);

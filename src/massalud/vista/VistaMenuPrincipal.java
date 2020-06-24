@@ -31,6 +31,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         miSalir = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -75,6 +76,15 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Orden");
+
+        jMenuItem12.setText("Generar Orden");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem12);
+
         jMenuBar1.add(jMenu3);
 
         jMenu5.setText("Afiliado");
@@ -305,6 +315,15 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(vAdministrarAfiliado);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaGenerarOrden vGenerarOrden = new VistaGenerarOrden();
+        vGenerarOrden.setVisible(true);
+        escritorio.add(vGenerarOrden);
+        escritorio.moveToFront(vGenerarOrden);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -353,6 +372,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

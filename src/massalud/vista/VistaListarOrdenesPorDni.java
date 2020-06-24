@@ -71,6 +71,7 @@ public class VistaListarOrdenesPorDni extends javax.swing.JInternalFrame {
         btBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tOrdenes = new javax.swing.JTable();
+        btAnular = new javax.swing.JButton();
 
         jLabel1.setText("Lista de Ordenes por DNI del Afiliado");
 
@@ -109,19 +110,17 @@ public class VistaListarOrdenesPorDni extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tOrdenes);
 
+        btAnular.setText("Anular/Activar");
+        btAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAnularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btSalir1)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -135,6 +134,15 @@ public class VistaListarOrdenesPorDni extends javax.swing.JInternalFrame {
                         .addGap(202, 202, 202)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(92, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(337, 337, 337)
+                        .addComponent(btSalir1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,8 +156,10 @@ public class VistaListarOrdenesPorDni extends javax.swing.JInternalFrame {
                     .addComponent(btBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(btSalir1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSalir1)
+                    .addComponent(btAnular))
                 .addContainerGap())
         );
 
@@ -170,6 +180,32 @@ public class VistaListarOrdenesPorDni extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_tDniAfiliadoKeyTyped
+
+    private void btAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnularActionPerformed
+        int idOrdenSeleccionada;
+        int filaSeleccionada;
+
+        Orden o;
+
+        if(tOrdenes.getSelectedRow() != -1){
+            filaSeleccionada = tOrdenes.getSelectedRow();
+            idOrdenSeleccionada = (int)modelo.getValueAt(filaSeleccionada, 0);
+
+            o = od.buscarOrden(idOrdenSeleccionada);
+
+            if(o.isActivo()){
+                o.setActivo(false);
+            }else{
+                o.setActivo(true);
+            }
+
+            od.actualizarEstadoOrden(o);
+
+            listaOrdenes = od.listarOrdenes();
+            cargarDatos();
+        }
+
+    }//GEN-LAST:event_btAnularActionPerformed
 
     public void armarCabeceraTabla(){
         List<Object> columnas = new ArrayList<Object>();
@@ -219,8 +255,8 @@ public class VistaListarOrdenesPorDni extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAnular;
     private javax.swing.JButton btBuscar;
-    private javax.swing.JButton btSalir;
     private javax.swing.JButton btSalir1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

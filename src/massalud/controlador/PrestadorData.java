@@ -188,9 +188,10 @@ public class PrestadorData {
             
 
         try {
-            String sql = "SELECT * FROM prestador WHERE idEspecialidad = ?;";
+            String sql = "SELECT * FROM prestador WHERE activo=? AND idEspecialidad = ?;";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1,idEspecialidad);
+            ps.setBoolean(1, true);
+            ps.setInt(2,idEspecialidad);
             ResultSet resultSet = ps.executeQuery();
             
             Prestador prestador;

@@ -141,6 +141,41 @@ public class AfiliadoData {
         return afiliado;
     }
     
+    public Afiliado buscarAfiliadoActivo(int idAfiliado){
+    Afiliado afiliado=null;
+    
+   
+    try {
+            
+            String sql = "SELECT * FROM afiliado WHERE activo=? AND idAfiliado =?;";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setBoolean(1, true);
+            ps.setInt(2, idAfiliado);
+           
+            
+            ResultSet resultSet=ps.executeQuery();
+            
+            if(resultSet.next()){
+                afiliado = new Afiliado();
+                afiliado.setIdAfiliado(resultSet.getInt("idAfiliado"));
+                afiliado.setNombre(resultSet.getString("nombre"));
+                afiliado.setApellido(resultSet.getString("apellido"));
+                afiliado.setDni(resultSet.getInt("dni"));
+                afiliado.setActivo(resultSet.getBoolean("activo"));
+
+                
+            }      
+            ps.close();
+            
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar el afiliado: " + ex.getMessage());
+        }
+        
+        return afiliado;
+    }
+    
     // buscarAfliadoPorDni()
     public Afiliado buscarAfiliadoPorDni(int dniAfiliado){
     Afiliado afiliado=null;
@@ -152,6 +187,41 @@ public class AfiliadoData {
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dniAfiliado);
+           
+            
+            ResultSet resultSet=ps.executeQuery();
+            
+            if(resultSet.next()){
+                afiliado = new Afiliado();
+                afiliado.setIdAfiliado(resultSet.getInt("idAfiliado"));
+                afiliado.setNombre(resultSet.getString("nombre"));
+                afiliado.setApellido(resultSet.getString("apellido"));
+                afiliado.setDni(resultSet.getInt("dni"));
+                afiliado.setActivo(resultSet.getBoolean("activo"));
+
+                
+            }      
+            ps.close();
+            
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar el afiliado por dni: " + ex.getMessage());
+        }
+        
+        return afiliado;
+    }
+    
+    public Afiliado buscarAfiliadoPorDniActivo(int dniAfiliado){
+    Afiliado afiliado=null;
+    
+   
+    try {
+            
+            String sql = "SELECT * FROM afiliado WHERE activo=? AND dni =?;";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setBoolean(1, true);
+            ps.setInt(2, dniAfiliado);
            
             
             ResultSet resultSet=ps.executeQuery();

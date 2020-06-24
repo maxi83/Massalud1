@@ -137,14 +137,15 @@ public class HorarioData {
     
     // Listar Horarios por prestador(idprestador)
     
-    public List<Horario> obtenerHorarioPorPrestador(int idPrestador){
+//    public List<Horario> obtenerHorarioPorPrestador(int idPrestador){
+    public List<Horario> obtenerHorarioPorPrestador(Prestador idPrestador){
         List<Horario> listaHorario = new ArrayList<Horario>();
             
 
         try {
             String sql = "SELECT * FROM horario WHERE idPrestador = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idPrestador);
+            ps.setInt(1, idPrestador.getIdPrestador());
             ResultSet resultSet = ps.executeQuery();
             
             while(resultSet.next()){
@@ -153,8 +154,8 @@ public class HorarioData {
                 horario.setDia(resultSet.getString("dia"));
                 horario.setHorarioAtencion(resultSet.getInt("horarioAtencion"));
                 
-                Prestador p = buscarPrestador(resultSet.getInt("idPrestador"));
-                horario.setIdPrestador(p);
+//                Prestador p = buscarPrestador(resultSet.getInt("idPrestador"));
+                horario.setIdPrestador(idPrestador);
                 
                 
                 listaHorario.add(horario);

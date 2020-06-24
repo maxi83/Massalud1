@@ -73,6 +73,7 @@ public class VistaListarOrdenesPorFecha extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tOrdenes = new javax.swing.JTable();
         dcFecha = new com.toedter.calendar.JDateChooser();
+        btAnular = new javax.swing.JButton();
 
         jLabel1.setText("Lista de Ordenes por Fecha");
 
@@ -105,15 +106,27 @@ public class VistaListarOrdenesPorFecha extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tOrdenes);
 
+        btAnular.setText("Anular/Activar");
+        btAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAnularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btSalir1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(27, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(btAnular)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btSalir1)))
                 .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,14 +148,17 @@ public class VistaListarOrdenesPorFecha extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(btBuscar)
-                    .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(btBuscar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(btSalir1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSalir1)
+                    .addComponent(btAnular))
                 .addContainerGap())
         );
 
@@ -161,6 +177,32 @@ public class VistaListarOrdenesPorFecha extends javax.swing.JInternalFrame {
 
         cargarDatos();
     }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void btAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnularActionPerformed
+        int idOrdenSeleccionada;
+        int filaSeleccionada;
+
+        Orden o;
+
+        if(tOrdenes.getSelectedRow() != -1){
+            filaSeleccionada = tOrdenes.getSelectedRow();
+            idOrdenSeleccionada = (int)modelo.getValueAt(filaSeleccionada, 0);
+
+            o = od.buscarOrden(idOrdenSeleccionada);
+
+            if(o.isActivo()){
+                o.setActivo(false);
+            }else{
+                o.setActivo(true);
+            }
+
+            od.actualizarEstadoOrden(o);
+
+            listaOrdenes = od.listarOrdenes();
+            cargarDatos();
+        }
+
+    }//GEN-LAST:event_btAnularActionPerformed
 
     
     public void armarCabeceraTabla(){
@@ -216,6 +258,7 @@ public class VistaListarOrdenesPorFecha extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAnular;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btSalir1;
     private com.toedter.calendar.JDateChooser dcFecha;

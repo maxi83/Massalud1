@@ -64,6 +64,7 @@ public class VistaListarOrdenes extends javax.swing.JInternalFrame {
         btSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tOrdenes = new javax.swing.JTable();
+        btAnular = new javax.swing.JButton();
 
         jLabel1.setText("Listado de Ordenes");
 
@@ -87,6 +88,13 @@ public class VistaListarOrdenes extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tOrdenes);
 
+        btAnular.setText("Anular/Activar");
+        btAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAnularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,12 +104,15 @@ public class VistaListarOrdenes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btSalir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(btAnular)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btSalir)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,11 +120,17 @@ public class VistaListarOrdenes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(btSalir)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addComponent(btSalir)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btAnular)
+                        .addGap(22, 22, 22))))
         );
 
         pack();
@@ -122,6 +139,32 @@ public class VistaListarOrdenes extends javax.swing.JInternalFrame {
     private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btSalirActionPerformed
+
+    private void btAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnularActionPerformed
+        int idOrdenSeleccionada;
+        int filaSeleccionada;
+        
+        Orden o;
+        
+        if(tOrdenes.getSelectedRow() != -1){
+            filaSeleccionada = tOrdenes.getSelectedRow();
+            idOrdenSeleccionada = (int)modelo.getValueAt(filaSeleccionada, 0);
+            
+            o = od.buscarOrden(idOrdenSeleccionada);
+            
+            if(o.isActivo()){
+                o.setActivo(false);
+            }else{
+                o.setActivo(true);
+            }
+            
+            od.actualizarEstadoOrden(o);
+            
+            listaOrdenes = od.listarOrdenes();
+            cargarDatos();
+        }
+        
+    }//GEN-LAST:event_btAnularActionPerformed
 
     
     public void armarCabeceraTabla(){
@@ -170,6 +213,7 @@ public class VistaListarOrdenes extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAnular;
     private javax.swing.JButton btSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
