@@ -530,31 +530,45 @@ public class VistaGenerarOrden extends javax.swing.JInternalFrame {
             String fechaIngresada = formato.format(dcFecha.getDate());
         
             fecha = LocalDate.parse(fechaIngresada, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        }
-        
-        if(tNombreAfiliado.getText()== null){
+            
+            
+            if(tNombreAfiliado.getText()== null || tNombreAfiliado.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Por ingrese los id o documento correcto.");     
-        }else{
-            idA = Integer.parseInt(tIdAfiliado.getText());
-        }
-        
-        if(tHorarios.getSelectedRow() != -1){
-            filaSeleccionada = tHorarios.getSelectedRow();
-            idH = (int)modelo.getValueAt(filaSeleccionada, 0);
+            }else{
+                idA = Integer.parseInt(tIdAfiliado.getText());
+                
+                
+                if(tHorarios.getSelectedRow() != -1){
+                    filaSeleccionada = tHorarios.getSelectedRow();
+                    idH = (int)modelo.getValueAt(filaSeleccionada, 0);
+                       
+                    if(idH == -1){
+                        JOptionPane.showMessageDialog(this, "Por favor seleccione un horario.");
+                    }else{
+                        formaPago = (String)cbFormaPago.getSelectedItem();
+                        importe = Float.parseFloat((String)cbImporte.getSelectedItem());
+
+                        Afiliado a = ad.buscarAfiliadoActivo(idA);
+                        Horario h = hd.buscarHorario(idH);
+
+                        Orden o = new Orden(fecha, formaPago, importe, a, h, true);
+
+                        od.generarOrden(o);
+
+                        tIdOrden.setText(o.getIdOrden() + "");
+                    }
+                }
+                
+                
+            }
             
         }
         
-        formaPago = (String)cbFormaPago.getSelectedItem();
-        importe = Float.parseFloat((String)cbImporte.getSelectedItem());
         
-        Afiliado a = ad.buscarAfiliadoActivo(idA);
-        Horario h = hd.buscarHorario(idH);
         
-        Orden o = new Orden(fecha, formaPago, importe, a, h, true);
         
-        od.generarOrden(o);
         
-        tIdOrden.setText(o.getIdOrden() + "");
+        
     }//GEN-LAST:event_btCrearActionPerformed
 
     private void tIdAfiliadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tIdAfiliadoKeyTyped

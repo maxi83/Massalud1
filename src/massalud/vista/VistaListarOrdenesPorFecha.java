@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import massalud.controlador.AfiliadoData;
 import massalud.controlador.Conexion;
@@ -174,8 +175,12 @@ public class VistaListarOrdenesPorFecha extends javax.swing.JInternalFrame {
 //        String fechaIngresada = formato.format(dcFecha.getDate());
 //        
 //        LocalDate fecha = LocalDate.parse(fechaIngresada, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
-        cargarDatos();
+        if(dcFecha.getDateEditor().getDate() == null){
+            JOptionPane.showMessageDialog(this, "Por favor ingrese una fecha");            
+        }else{
+            cargarDatos();
+        }
+        
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void btAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnularActionPerformed

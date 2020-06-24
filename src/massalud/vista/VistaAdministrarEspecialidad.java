@@ -25,6 +25,8 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
     
     private List<Especialidad> listaEspecialidades;
     
+    private int maximo;
+    
     /**
      * Creates new form VistaAdministrarEspecialidad
      */
@@ -193,7 +195,7 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
         int idEspecialidad;
         String nombre;
         
-        int maximo = listaEspecialidades.size();
+        maximo = listaEspecialidades.size();
 
         Especialidad e;
         
@@ -228,7 +230,7 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tNombreEspecialidadActionPerformed
 
     private void btCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearActionPerformed
-
+                
         String nombreEspecialidad;
         
         Especialidad e;
@@ -238,6 +240,9 @@ public class VistaAdministrarEspecialidad extends javax.swing.JInternalFrame {
         e = new Especialidad(nombreEspecialidad);
         ed.agregarEspecialidad(e);
         tIdEspecialidad.setText(e.getIdEspecialidad() + "");
+        
+        listaEspecialidades= ed.listarEspecialidades(); 
+        maximo = listaEspecialidades.size();
     }//GEN-LAST:event_btCrearActionPerformed
 
     private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
